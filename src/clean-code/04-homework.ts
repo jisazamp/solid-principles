@@ -1,24 +1,21 @@
 ;(() => {
   function isRedFruit(fruit: string): boolean {
-    if (['manzana', 'cereza', 'ciruela'].includes(fruit)) return true
-
-    return false
+    const redFruits = ['manzana', 'cereza', 'ciruela']
+    return redFruits.includes(fruit)
   }
 
-  function getFruitsByColor(color: string): string[] {
-    switch (color) {
-      case 'red':
-        return ['manzana', 'fresa']
+  type FruitColor = 'red' | 'yellow' | 'purple'
 
-      case 'yellow':
-        return ['piña', 'banana']
-
-      case 'purple':
-        return ['moras', 'uvas']
-
-      default:
-        throw Error('the color must be: red, yellow, purple')
+  function getFruitsByColor(color: FruitColor): string[] {
+    const fruitsByColor = {
+      red: ['manzana', 'fresa'],
+      yellow: ['piña', 'banana'],
+      purple: ['uvas', 'moras'],
     }
+
+    if (!Object.keys(fruitsByColor).includes(color)) throw Error('Error')
+
+    return fruitsByColor[color]
   }
 
   // Simplificar esta función
@@ -44,7 +41,7 @@
   console.log({ redFruits: getFruitsByColor('red') }) // ['manzana', 'fresa']
   console.log({ yellowFruits: getFruitsByColor('yellow') }) // ['piña', 'banana']
   console.log({ purpleFruits: getFruitsByColor('purple') }) // ['moras', 'uvas']
-  //   console.log({ pinkFruits: getFruitsByColor('pink') }) // Error: the color must be: red, yellow, purple
+  console.log({ pinkFruits: getFruitsByColor('pink') }) // Error: the color must be: red, yellow, purple
 
   // workingSteps
   console.log({ workingSteps: workingSteps() }) // Cambiar los valores de la línea 31 y esperar los resultados
